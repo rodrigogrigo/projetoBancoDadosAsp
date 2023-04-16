@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using PrimeiroProjetoBanco.Data;
 using PrimeiroProjetoBanco.Models;
-using PrimeiroProjetoBanco.Models.Interfaces;
+using PrimeiroProjetoBanco.Repository;
+using PrimeiroProjetoBanco.Repository.Interfaces;
 
 namespace PrimeiroProjetoBanco
 {
@@ -17,7 +18,7 @@ namespace PrimeiroProjetoBanco
             // Neste momento, o AppDbContext estará disponível para todas
             // as classes que o usarem, através de injeção de dependência.
             builder.Services.AddDbContext<AppDbContext>();
-            builder.Services.AddTransient<IPessoa, Pessoa>();
+            builder.Services.AddTransient<IPessoaRepository, PessoaRepository>();
             //builder.Services.AddTransient<IEndereco, Endereco>();
 
             var app = builder.Build();

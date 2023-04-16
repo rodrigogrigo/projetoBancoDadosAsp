@@ -1,34 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimeiroProjetoBanco.Data;
 using PrimeiroProjetoBanco.Models;
-using PrimeiroProjetoBanco.Models.Interfaces;
+using PrimeiroProjetoBanco.Repository.Interfaces;
 
 namespace PrimeiroProjetoBanco.Controllers
 {
     [Route("[controller]")]
     public class PessoaController : Controller
     {
-        private readonly IPessoa _pessoa;
-        private readonly AppDbContext _context;
-        //private readonly IEndereco _endereco;
+        private readonly IPessoaRepository _pessoaRepository;
 
-        public PessoaController(IPessoa pessoa, AppDbContext appDbContext)
+        public PessoaController(IPessoaRepository pessoa)
         {
-            _pessoa = pessoa;
-            _context = appDbContext;
+            _pessoaRepository = pessoa;
         }
 
         [HttpGet("[action]")]
         public List<Pessoa> ObterTodasPessoas()
         {
             //return _pessoa.ObterTodasPessoasEF();
-            return _pessoa.ObterTodasPessoas();
+            return _pessoaRepository.ObterTodasPessoas();
         }
 
         [HttpPost("[action]")]
         public int InserirPessoa([FromBody] Pessoa pessoa)
         {
-            return _pessoa.InserirPessoa(pessoa, _context);
+            return _pessoaRepository.InserirPessoa(pessoa);
         }
     }
 }
